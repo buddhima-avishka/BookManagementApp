@@ -13,3 +13,17 @@ Content-Type: application/json
   "isbn": "978-0743273565",
   "publicationDate": "1925-04-10"
 }
+
+###
+PUT http://localhost:5105/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Madol Doova - Revised",
+  "author": "Martin Wickramasinghe",
+  "isbn": "978-955-30-2244-1",
+  "publicationDate": "1947-01-01"
+}
+
+###
+DELETE http://localhost:5105/api/books/1

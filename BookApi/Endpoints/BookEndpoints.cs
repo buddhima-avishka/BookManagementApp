@@ -25,5 +25,27 @@ public static class BookEndpoints
             return Results.Created($"/api/books/{newBook.Id}", newBook);
         });
 
+        group.MapPut("/{id}", (int id, BookCreateDto updatedDto) => {
+            var index = _books.FindIndex(b => b.Id == id);
+            if (index == -1) return Results.NotFound();
+
+            _books[index] = new Book {
+                Id = id,
+                Title = updatedDto.Title,
+                Author = updatedDto.Author,
+                Isbn = updatedDto.Isbn,
+                PublicationDate = updatedDto.PublicationDate
+            };
+            return Results.NoContent();
+        });
+
+        group.MapDelete("/{id}", (int id) => {
+            var book = _books.FirstOrDefault(b => b.Id == id);
+            if (book is null) return Results.NotFound();
+
+            _books.Remove(book);
+            return Results.NoContent();
+        });
+
     }
 }
