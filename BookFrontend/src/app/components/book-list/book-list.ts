@@ -15,6 +15,8 @@ export class BookList implements OnInit {
   books: Book[] = [];
   newBook: Book = { id: 0, title: '', author: '', isbn: '', publicationDate: '' };
 
+  isFormVisible: boolean = false;
+
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void { this.loadBooks(); }
@@ -23,21 +25,26 @@ export class BookList implements OnInit {
     this.bookService.getBooks().subscribe(data => this.books = data);
   }
 
+  toggleForm() {
+    this.isFormVisible = !this.isFormVisible;
+    if (!this.isFormVisible) this.resetForm();
+  }
+
   saveBook() {
     if (this.newBook.id === 0) {
       this.bookService.addBook(this.newBook).subscribe(() => {
         this.loadBooks();
-        this.resetForm();
+        this.toggleForm();
       });
     } else {
       this.bookService.updateBook(this.newBook.id, this.newBook).subscribe(() => {
         this.loadBooks();
-        this.resetForm();
+        this.toggleForm();
       });
     }
   }
 
-  editBook(book: Book) { this.newBook = { ...book }; }
+  editBook(book: Book) { this.newBook = { ...book }; this.isFormVisible = true;}
 
   deleteBook(id: number) {
     this.bookService.deleteBook(id).subscribe(() => this.loadBooks());

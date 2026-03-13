@@ -14,11 +14,11 @@ public static class BookEndpoints
         group.MapGet("/", () => Results.Ok(_books));
 
         // GET BOOK BY ID
-        group.MapGet("/{id}", (int id) =>
-        {
-            var book = _books.FirstOrDefault(b => b.Id == id);
-            return book is not null ? Results.Ok(book) : Results.NotFound();
-        });
+        // group.MapGet("/{id}", (int id) =>
+        // {
+        //     var book = _books.FirstOrDefault(b => b.Id == id);
+        //     return book is not null ? Results.Ok(book) : Results.NotFound();
+        // });
 
         // ADD BOOK
         group.MapPost("/", (Book book) =>

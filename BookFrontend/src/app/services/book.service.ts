@@ -5,7 +5,7 @@ import { Book } from '../models/book';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
-  private apiUrl = 'http://localhost:5105/api/books'; // Backend URL eka meka wenas karanna
+  private apiUrl = 'http://localhost:5105/api/books';
 
   constructor(private http: HttpClient) { }
 
