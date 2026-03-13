@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Book Management</h2>
+
+  <div class="form-group">
+    <input [(ngModel)]="newBook.title" placeholder="Title">
+    <input [(ngModel)]="newBook.author" placeholder="Author">
+    <input [(ngModel)]="newBook.isbn" placeholder="ISBN">
+    <input type="date" [(ngModel)]="newBook.publicationDate">
+    <button (click)="saveBook()">{{ newBook.id === 0 ? 'Add' : 'Update' }} Book</button>
+  </div>
+
+  <hr>
+
+  <table>
+    <tr>
+      <th>Title</th><th>Author</th><th>ISBN</th><th>Publication Date</th><th>Actions</th>
+    </tr>
+    <tr *ngFor="let book of books">
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.isbn }}</td>
+      <td>{{ book.publicationDate | date }}</td>
+      <td>
+        <button (click)="editBook(book)">Edit</button>
+        <button (click)="deleteBook(book.id)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>
